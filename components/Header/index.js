@@ -11,6 +11,7 @@
 // Use your function to create a header
 // and append it to the DOM inside the div.header-container
 
+const headerEndPoint = document.querySelector('.header-container')
 const create = (element) => document.createElement(element);
 
 
@@ -40,4 +41,5 @@ function Header() {
     return header;
 }
 
+headerEndPoint.appendChild(Header());
 // console.log(Header()); // Check if working

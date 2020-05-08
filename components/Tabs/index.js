@@ -7,12 +7,12 @@
 //
 //  Each tab should look like this:
 //    <div class="tab">topic here</div>
-endPoint = document.querySelector('.topics');
+tabEndPoint = document.querySelector('.topics');
 
 axios.get('https://lambda-times-backend.herokuapp.com/topics')
 .then(resolve => {
     resolve.data.topics.forEach(topic => {
-        endPoint.appendChild(Tab(topic));
+        tabEndPoint.appendChild(Tab(topic));
     })
     
 })
