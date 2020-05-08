@@ -18,3 +18,53 @@
 // </div>
 //
 // Use your function to create a card for each of the articles and add the card to the DOM.
+
+cardsEndPoint = document.querySelector('.cards-container');
+
+function articleFetcher(topic) {
+    axios.get('https://lambda-times-backend.herokuapp.com/articles')
+        .then(resolve => {
+            resolve.data.articles[`${topic}`].forEach(article => {
+                cardsEndPoint.appendChild(Article(article));
+            })
+        })
+        .catch(error => {
+            console.log('Error', error);
+        });
+}
+
+articleFetcher("javascript");
+articleFetcher("bootstrap");
+articleFetcher("technology");
+articleFetcher("jquery");
+articleFetcher("node");
+
+function Article(resolve) {
+
+    // Create elements
+    const card = create('div');
+    const headline = create('div');
+    const author = create('div');
+    const imgContainer = create('div');
+    const authorImage = create('img');
+    const authorName = create('span');
+
+    // Add classes
+    card.classList.add('card');
+    headline.classList.add('headline');
+    author.classList.add('author');
+    imgContainer.classList.add('img-container');
+
+    // Fill with content
+    headline.textContent = resolve.headline;
+    authorImage.src = resolve.authorPhoto;
+    authorName.textContent = resolve.authorName;
+
+    card.appendChild(headline);
+    card.appendChild(author);
+    author.appendChild(imgContainer);
+    author.appendChild(authorName);
+    imgContainer.appendChild(authorImage);
+
+    return card;
+}
